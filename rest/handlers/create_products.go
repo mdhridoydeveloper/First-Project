@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func Createproduct(w http.ResponseWriter, r *http.Request) {
+func Createproducts(w http.ResponseWriter, r *http.Request) {
 
 	var Newproduct database.Product
 
@@ -19,8 +19,7 @@ func Createproduct(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "plz give me  vaild json", 400)
 		return
 	}
-	Newproduct.ID = len(database.Productlist) + 1
-	database.Productlist = append(database.Productlist, Newproduct)
+	createdProduct := database.Store(Newproduct)
 
-	util.SendData(w, Newproduct, 200)
+	util.SendData(w, createdProduct, 200)
 }

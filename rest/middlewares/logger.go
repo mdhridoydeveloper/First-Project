@@ -1,13 +1,17 @@
 package middleware
 
 import (
-	"log"
+	"fmt"
 	"net/http"
+	"time"
 )
 
-func Hudai(next http.Handler) http.Handler {
+func Logger(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Println("ami middleware: Hudai")
+		start := time.Now()
 		next.ServeHTTP(w, r)
+		fmt.Println(r.Method, r.URL.Path, time.Since((start)))
+
 	})
+
 }
