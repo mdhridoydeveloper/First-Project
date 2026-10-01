@@ -11,7 +11,7 @@ type Product struct {
 }
 
 func Store(p Product) Product {
-	p.ID = len(productlist)
+	p.ID = len(productlist) + 1
 	productlist = append(productlist, p)
 	return p
 }
